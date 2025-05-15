@@ -46,12 +46,12 @@ export let signUp = () => {
   }
 
 
+  
 
   // Sign up with Firebase
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      
       Swal.fire("Success", "Account Created", "success");
       setTimeout(() => window.location.href = "dashboard.html", 1000);
     })

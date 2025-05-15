@@ -7,6 +7,7 @@
   <title>Authenticaion Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -31,12 +32,12 @@
 
     <!-- Sidebar content -->
     <aside id="sidebar" class="w-full md:w-64 bg-gray-900 text-white px-6 py-8 space-y-4 hidden md:block">
-      <h2 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2 md:block hidden">Home</h2>
+      <h2 class="text-2xl font-bold mb-6 border-b border-gray-700 pb-2 md:block hidden"><a href="dashboard.html">Home</a></h2>
       <nav class="space-y-4">
-        <a href="#" class="block text-sm text-gray-300 hover:text-white">Email Verification</a>
-        <a href="#" class="block text-sm text-gray-300 hover:text-white">Update Password</a>
-        <a href="#" class="block text-sm text-gray-300 hover:text-white">Update Profile</a>
-        <a href="#" class="block text-sm text-gray-300 hover:text-white">Update Email</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white" id="emailVerification">Email Verification</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white" id="idUpdatePassword">Update Password</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white" id="passwordUpdated">Update Profile</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white" id="emailupdated">Update Email</a>
       </nav>
     </aside>
 
@@ -47,39 +48,38 @@
       </div>
 
       <!-- Main Container -->
-    <div class="flex justify-center items-center min-h-screen bg-gray-200">
+      <div class="flex justify-center items-center min-h-screen bg-gray-200" id="main-content">
         <!-- Profile Card -->
         <div class="bg-white rounded-lg shadow-lg p-8 w-96">
-            <!-- Profile Header -->
-            <div class="text-center">
-                <img id="photo" src="https://www.w3schools.com/howto/img_avatar.png" alt="User Image" class="rounded-full w-32 h-32 mx-auto mb-4">
+          <!-- Profile Header -->
+          <div class="text-center">
+            <img id="photo" src="" alt="User Image" class="rounded-full w-32 h-32 mx-auto mb-4">
 
-                <!-- User's Name -->
-                <h2 class="text-3xl font-semibold text-gray-800" id="userName"></h2>
-                <p class="text-gray-500 mt-2" id="userEmail"></p>
-                <p class="text-gray-500 mt-2" id="userPhone"></p>
-                <p class="text-gray-500 mt-2" id="userAddress"></p>
-                <p class="text-gray-500 mt-2" id="emailVerified"></p>
-            </div>
-
-
-            <!-- Recent Activity Section -->
-            <div class="mt-6">
-                <h3 class="text-xl font-semibold text-gray-700">Activity</h3>
-                <ul class="list-disc ml-5 text-gray-500">
-                    <li id="lastLoginAt"></li>
-                    <li id="lastLogin"></li>
-                </ul>
-            </div>
+            <!-- User's Name -->
+            <h2 class="text-3xl font-semibold text-gray-800" id="userName"></h2>
+            <p class="text-gray-500 mt-2" id="userEmail"></p>
+            <p class="text-gray-500 mt-2" id="userPhone"></p>
+            <p class="text-gray-500 mt-2" id="emailVerified"></p>
+          </div>
 
 
-            <!-- Log Out Button -->
-            <div class="mt-4">
-                <button id="logout-btn" class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">Log Out</button>
-            </div>
+          <!-- Recent Activity Section -->
+          <div class="mt-6">
+            <h3 class="text-xl font-semibold text-gray-700">Activity</h3>
+            <ul class="list-disc ml-5 text-gray-500">
+              <li id="lastLoginAt"></li>
+              <li id="lastLogin"></li>
+            </ul>
+          </div>
+
+          <!-- Log Out Button -->
+          <div class="mt-4">
+            <button id="logout-btn" class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">Log
+              Out</button>
+          </div>
         </div>
-    </div>
-      
+      </div>
+
     </main>
 
   </div>
@@ -91,6 +91,10 @@
 
   <script src="./JavaScript/dashboard.js" type="module"></script>
   <script src="./JavaScript/handleSignOut.js" type="module"></script>
+  <script src="./JavaScript/emilVerification.js" type="module"></script>
+  <script src="./JavaScript/updatePassword.js" type="module"></script>
+  <script src="./JavaScript/updateProfile.js" type="module"></script>
+  <script src="./JavaScript/updateEmail.js" type="module"></script>
 </body>
 
 </html>

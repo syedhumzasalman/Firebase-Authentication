@@ -37,12 +37,14 @@ onAuthStateChanged(auth, (user) => {
   const lastLoginAt = user.metadata.lastLoginAt;
   const formattedTime = moment(Number(lastLoginAt)).format('MMMM Do YYYY, h:mm:ss a');
 
+  const photoURL = user?.photoURL ? user.photoURL : 'https://www.w3schools.com/howto/img_avatar.png';
+  
+  
   if (user) {
-    document.getElementById("photo").src = user.photoURL;
+    document.getElementById("photo").src = photoURL;
     document.getElementById("userName").innerText = user.displayName || "No Name Available";
     document.getElementById("userEmail").innerText = user.email || 'No Email Available';
     document.getElementById("userPhone").innerText = user.phoneNumber || "No Phone Number";
-    document.getElementById("userAddress").innerText = user.address || "No Address Available";
     document.getElementById("lastLogin").innerText = 'User created on: ' + formattedDate || "No Date Available";
     document.getElementById("lastLoginAt").innerText = 'lastLoginAt : ' + formattedTime || "No Date Available";
 

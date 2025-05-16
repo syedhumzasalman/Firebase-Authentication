@@ -1,4 +1,4 @@
-import { auth, createUserWithEmailAndPassword, onAuthStateChanged } from "../fireBase.js"
+import { auth, createUserWithEmailAndPassword, onAuthStateChanged,updateProfile } from "../fireBase.js"
 
 
 //  Only run this once to check if user is already logged in
@@ -51,9 +51,16 @@ export let signUp = () => {
   // Sign up with Firebase
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
-      Swal.fire("Success", "Account Created", "success");
-      setTimeout(() => window.location.href = "dashboard.html", 1000);
+      const user = userCredential.user;  
+
+      return updateProfile(user, {
+        displayName: name
+      }).then(() => {
+        Swal.fire("Success", "Account Created", "success");
+        setTimeout(() => window.location.href = "dashboard.html", 1000);
+      });
+
+
     })
     .catch((error) => {
       Swal.fire({

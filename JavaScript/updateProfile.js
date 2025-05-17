@@ -3,7 +3,7 @@ import { auth, updateProfile } from "../fireBase.js";
 let mainContent = document.getElementById("main-content");
 
 
-let passwordUpdate = () => {
+let ProfileUpdate = () => {
     const user = auth.currentUser;
 
     if (!user) {
@@ -14,23 +14,27 @@ let passwordUpdate = () => {
 
 
     mainContent.innerHTML = `
-<div class="bg-white rounded-lg shadow-lg p-8 w-96 ml-8">
-            <h3 class="text-xl font-semibold text-gray-700 text-center mb-4">Update Profile</h3>
-            <div class="mb-4">
-              <label class="block text-gray-600 text-sm mb-1">Display Name</label>
-              <input id="updateName" type="text"
-                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-400"
-                placeholder="Enter new display name">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-600 text-sm mb-1">Photo URL</label>
-              <input id="updatePhoto" type="url"
-                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-400"
-                placeholder="Enter photo URL">
-            </div>
-            <button id="update-profile-btn"
-              class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Update Profile</button>
-          </div>
+         <div class="bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 rounded-3xl shadow-2xl p-8 w-96 ml-8 border border-gray-200 hover:shadow-indigo-500/40 transition-shadow duration-300">
+  <h3 class="text-2xl font-extrabold text-indigo-700 text-center mb-6 tracking-wide">Update Profile</h3>
+  
+  <div class="mb-6">
+    <label for="updateName" class="block text-gray-700 font-semibold mb-2">Display Name</label>
+    <input id="updateName" type="text" placeholder="Enter new display name"
+      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 transition" />
+  </div>
+  
+  <div class="mb-6">
+    <label for="updatePhoto" class="block text-gray-700 font-semibold mb-2">Photo URL</label>
+    <input id="updatePhoto" type="url" placeholder="Enter photo URL"
+      class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 transition" />
+  </div>
+  
+  <button id="update-profile-btn"
+    class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 shadow-lg hover:shadow-indigo-500/50 transition duration-300">
+    Update Profile
+  </button>
+</div>
+
 `
 
 
@@ -39,8 +43,8 @@ let passwordUpdate = () => {
         let name = document.getElementById("updateName").value.trim();
         let url = document.getElementById("updatePhoto").value.trim();
 
-        if (!name || !url) {
-            swal("Warning", "Both name and photo URL are required.", "warning");
+        if (!name && !url) {
+            swal("Warning", "At Least one field Must Required name and photo URL.", "warning");
             return;
         }
 
@@ -59,4 +63,4 @@ let passwordUpdate = () => {
 }
 
 
-document.getElementById("passwordUpdated").addEventListener("click", passwordUpdate);
+document.getElementById("profileUpdated").addEventListener("click", ProfileUpdate);

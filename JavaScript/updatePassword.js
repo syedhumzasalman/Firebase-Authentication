@@ -16,7 +16,7 @@ let passwordReset = () => {
 
     // input open hu ga new password ke lie
     swal({
-        title: "Enter New Password",
+        title: "🔒 Enter New Password",
         text: "Password must be at least 6 characters",
         content: {
             element: "input",

@@ -43,18 +43,18 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     document.getElementById("photo").src = photoURL;
     document.getElementById("userName").innerText = user.displayName || "No Name Available";
-    document.getElementById("userEmail").innerText = user.email || 'No Email Available';
+    document.querySelector(".userEmail").innerText = user.email || 'No Email Available';
     document.getElementById("userPhone").innerText = user.phoneNumber || "No Phone Number";
     document.getElementById("lastLogin").innerText = 'User created on: ' + formattedDate || "No Date Available";
     document.getElementById("lastLoginAt").innerText = 'lastLoginAt : ' + formattedTime || "No Date Available";
 
-    const emailVerifiedEl = document.getElementById("emailVerified");
+    const emailVerifiedEl = document.querySelector(".emailVerified");
 
     if (user.emailVerified) {
-      emailVerifiedEl.innerText = "Email Verified";
+      emailVerifiedEl.innerText = "✅ Email Verified";
       emailVerifiedEl.classList.add("text-green-500");
     } else {
-      emailVerifiedEl.innerText = "Email Not Verified";
+      emailVerifiedEl.innerText = "❌ Email Not Verified";
       emailVerifiedEl.classList.add("text-red-500");
     }
 

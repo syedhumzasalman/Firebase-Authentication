@@ -98,13 +98,175 @@ const firebaseDocs = {
   .catch((error) => {
     console.error('Error:', error.message);
   });`
-  }
-};
+  },
+  "9": {
+    title: "Sign In with Google",
+    method: "signInWithPopup(auth, provider)",
+    description: "Allows users to sign in using their Google account via a popup window.",
+    code: `import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
+signInWithPopup(auth, provider)
+  .then((result) => {
+    const user = result.user;
+    console.log('Signed in with Google:', user);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "10": {
+    title: "Sign In with Facebook",
+    method: "signInWithPopup(auth, provider)",
+    description: "Allows users to sign in using their Facebook account via a popup window.",
+    code: `import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
+
+const provider = new FacebookAuthProvider();
+signInWithPopup(auth, provider)
+  .then((result) => {
+    const user = result.user;
+    console.log('Signed in with Facebook:', user);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "11": {
+    title: "Sign In with GitHub",
+    method: "signInWithPopup(auth, provider)",
+    description: "Allows users to sign in using their GitHub account via a popup window.",
+    code: `import { GithubAuthProvider, signInWithPopup } from "firebase/auth";
+
+const provider = new GithubAuthProvider();
+signInWithPopup(auth, provider)
+  .then((result) => {
+    const user = result.user;
+    console.log('Signed in with GitHub:', user);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "12": {
+    title: "Sign In with Twitter",
+    method: "signInWithPopup(auth, provider)",
+    description: "Allows users to sign in using their Twitter account via a popup window.",
+    code: `import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
+
+const provider = new TwitterAuthProvider();
+signInWithPopup(auth, provider)
+  .then((result) => {
+    const user = result.user;
+    console.log('Signed in with Twitter:', user);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "13": {
+    title: "Sign In with Phone Number",
+    method: "signInWithPhoneNumber(auth, phoneNumber, appVerifier)",
+    description: "Sends an SMS message to the user's phone with a verification code and signs them in upon successful verification.",
+    code: `import { signInWithPhoneNumber } from "firebase/auth";
+
+// Set up reCAPTCHA verifier
+const appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+
+signInWithPhoneNumber(auth, '+1234567890', appVerifier)
+  .then((confirmationResult) => {
+    // SMS sent. Prompt user to type the code from the message
+    const code = window.prompt('Enter the verification code');
+    return confirmationResult.confirm(code);
+  })
+  .then((result) => {
+    const user = result.user;
+    console.log('Signed in with phone number:', user);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "14": {
+    title: "Sign In Anonymously",
+    method: "signInAnonymously(auth)",
+    description: "Signs in a user without requiring credentials, creating a temporary anonymous account.",
+    code: `import { signInAnonymously } from "firebase/auth";
+
+signInAnonymously(auth)
+  .then((result) => {
+    const user = result.user;
+    console.log('Signed in anonymously:', user);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "15": {
+    title: "Link Credentials to User",
+    method: "linkWithCredential(user, credential)",
+    description: "Links a new authentication credential to an existing user account.",
+    code: `import { EmailAuthProvider, linkWithCredential } from "firebase/auth";
+
+const credential = EmailAuthProvider.credential(email, password);
+linkWithCredential(auth.currentUser, credential)
+  .then((usercred) => {
+    const user = usercred.user;
+    console.log("Account linking success", user);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "16": {
+    title: "Reauthenticate User",
+    method: "reauthenticateWithCredential(user, credential)",
+    description: "Reauthenticates a user with a fresh credential. Useful for sensitive operations.",
+    code: `import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
+
+const credential = EmailAuthProvider.credential(email, password);
+reauthenticateWithCredential(auth.currentUser, credential)
+  .then(() => {
+    console.log('User reauthenticated.');
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "17": {
+    title: "Fetch Sign-In Methods for Email",
+    method: "fetchSignInMethodsForEmail(auth, email)",
+    description: "Returns the list of sign-in methods that can be used to sign in with the given email address.",
+    code: `import { fetchSignInMethodsForEmail } from "firebase/auth";
+
+fetchSignInMethodsForEmail(auth, email)
+  .then((methods) => {
+    console.log('Sign-in methods:', methods);
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+  "18": {
+    title: "Set Persistence",
+    method: "setPersistence(auth, persistence)",
+    description: "Sets the persistence type for the authentication session.",
+    code: `import { setPersistence, browserLocalPersistence } from "firebase/auth";
+
+setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    console.log('Persistence set to local.');
+  })
+  .catch((error) => {
+    console.error('Error:', error.message);
+  });`
+  },
+}
 
 
 
 
-   function loadDoc(id) {
+
+   function showDoc(id) {
   const data = firebaseDocs[id];
   document.getElementById("main-content").innerHTML = `
     <div class="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-full md:max-w-3xl mx-auto">

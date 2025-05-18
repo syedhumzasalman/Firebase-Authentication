@@ -3,29 +3,29 @@ import { auth, deleteUser } from "../fireBase.js";
 const deleteUserFun = () => {
     const user = auth.currentUser;
 
-
-    Swal.fire({
-        title: 'Are you sure?',
+    swal({
+        title: "Are you sure?",
         text: "You won't be able to recover this account!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-        if (result.isConfirmed) {
+        icon: "warning",
+        buttons: {
+            cancel: "Cancel",
+            confirm: {
+                text: "Yes, delete it!",
+                value: true,
+                closeModal: false,
+            },
+        },
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
             deleteUser(user)
                 .then(() => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'User Deleted Successfully 🎉',
-                        text: 'Your account has been permanently deleted.',
-                        showConfirmButton: false,
+                    swal({
+                        title: "User Deleted Successfully 🎉",
+                        text: "Your account has been permanently deleted.",
+                        icon: "success",
+                        buttons: false,
                         timer: 4000,
-                        timerProgressBar: true,
-                        position: 'center',
-                        background: '#f0f9ff',
-                        color: '#333',
                     }).then(() => {
                         setTimeout(() => {
                             window.location.href = "index.html";
@@ -33,11 +33,7 @@ const deleteUserFun = () => {
                     });
                 })
                 .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Failed to Delete',
-                        text: error.message,
-                    });
+                    swal("Failed to Delete", error.message, "error");
                 });
         }
     });

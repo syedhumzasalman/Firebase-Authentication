@@ -12,7 +12,7 @@ All authentication functions are implemented and organized clearly to ensure smo
 ## 🌐 Live Link
 
 You can check out the live working version of this project here:  
-👉 [firebase-assignment](https://firebase-first-assignment.netlify.app)
+👉 [firebase-Authentication-app](https://firebase-first-assignment.netlify.app)
 
 ## 🎯 Purpose of This Project
 

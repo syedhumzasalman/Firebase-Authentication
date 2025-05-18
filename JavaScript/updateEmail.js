@@ -1,4 +1,4 @@
-import { auth, updateEmail } from "../fireBase.js";
+import { auth, updateEmail, EmailAuthProvider, reauthenticateWithCredential,sendEmailVerification } from "../fireBase.js";
 
 let mainContent = document.getElementById("main-content");
 
@@ -18,8 +18,8 @@ let emailUpdate = () => {
   <h3 class="text-2xl font-extrabold text-indigo-700 text-center mb-6 tracking-wide">Update Email</h3>
   
   <div class="mb-6">
-    <label for="updateEmail" class="block text-gray-700 font-semibold mb-2">Updated Email</label>
-    <input id="updateEmail" type="text" placeholder="Enter new display name"
+    <label for="updateEmailId" class="block text-gray-700 font-semibold mb-2">Updated Email</label>
+    <input id="updateEmailId" type="text" placeholder="Enter new display name"
       class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 transition" />
   </div>
   
@@ -33,22 +33,40 @@ let emailUpdate = () => {
 
 
 
-    document.getElementById("update-profile-btn").addEventListener("click", () => {
-        let newEmail = document.getElementById("updateEmail").value.trim();
+    document.getElementById("update-profile-btn").addEventListener("click", async () => {
+        const newEmail = document.getElementById("updateEmailId").value.trim();
 
         if (!newEmail || !newEmail.includes("@") || !newEmail.includes(".")) {
             swal("Warning", "Please enter a valid email address.", "warning");
             return;
         }
 
-        updateEmail(user, newEmail)
-        .then(() => {
-            swal("Success", "Profile updated successfully.", "success")
+        if (!user.emailVerified) {
+            swal("Error", "Please verify your current email before updating.", "error");
+            return;
+        }
+
+        const password = prompt("Enter your current password:");
+
+        if (!password) {
+            swal("Cancelled", "Re-authentication cancelled.", "info");
+            return;
+        }
+
+        try {
+            await updateEmail(user, newEmail);
+            await sendEmailVerification(user); 
+
+            swal("Success", "Email updated. Please verify your new email before using it.", "success")
                 .then(() => location.reload());
-        }).catch((error) => {
-                swal("Error", error.message, "error");
-        });
+        } catch (error) {
+            swal("Error", error.message, "error");
+            console.error("Full Firebase error:", error);
+            // console.log("me error hu");
+        }
     });
+
+
 
 
 }

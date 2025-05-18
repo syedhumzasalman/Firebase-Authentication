@@ -202,20 +202,17 @@ signInAnonymously(auth)
   });`
   },
   "15": {
-    title: "Link Credentials to User",
-    method: "linkWithCredential(user, credential)",
-    description: "Links a new authentication credential to an existing user account.",
-    code: `import { EmailAuthProvider, linkWithCredential } from "firebase/auth";
-
-const credential = EmailAuthProvider.credential(email, password);
-linkWithCredential(auth.currentUser, credential)
-  .then((usercred) => {
-    const user = usercred.user;
-    console.log("Account linking success", user);
+      title: "Update Email",
+  method: "updateEmail(user, newEmail)",
+  description: "Updates the email address of the currently signed-in user. The user must have recently signed in, and their current email must be verified. Useful when a user changes their email address.",
+  code: `updateEmail(auth.currentUser, "newemail@example.com")
+  .then(() => {
+    console.log("Email updated successfully.");
   })
   .catch((error) => {
-    console.error('Error:', error.message);
+    console.error("Error:", error.message);
   });`
+
   },
   "16": {
     title: "Reauthenticate User",

@@ -1,4 +1,23 @@
-import { auth, createUserWithEmailAndPassword, onAuthStateChanged,updateProfile } from "../fireBase.js"
+import { auth, createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "../fireBase.js"
+
+
+let showPassword = () => {
+  let changeIcon = document.getElementById("changeIcon");
+  let signupPassword = document.getElementById("signupPassword");
+
+  // console.log(signinPassword);
+
+  if (signupPassword.type === "password") {
+    signupPassword.type = "text";
+    changeIcon.innerHTML = `<ion-icon name="lock-open-outline"></ion-icon>`;
+  } else {
+    signupPassword.type = "password";
+    changeIcon.innerHTML = `<ion-icon name="lock-closed"></ion-icon>`;
+  }
+}
+
+let passwordShow = document.querySelector(".passwordShow");
+passwordShow.addEventListener('click', showPassword)
 
 
 //  Only run this once to check if user is already logged in
@@ -46,14 +65,14 @@ export let signUp = () => {
   }
 
 
-  
+
 
   // Sign up with Firebase
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;  
+      const user = userCredential.user;
 
-      return updateProfile(user, {
+      updateProfile(user, {
         displayName: name
       }).then(() => {
         Swal.fire("Success", "Account Created", "success");

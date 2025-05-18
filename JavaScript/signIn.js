@@ -1,5 +1,24 @@
 import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "../fireBase.js";
 
+
+let showPassword = () => {
+    let changeIcon = document.getElementById("changeIcon");
+    let signinPassword = document.getElementById("signinPassword");
+
+    // console.log(signinPassword);
+    
+    if (signinPassword.type === "password") {
+        signinPassword.type = "text";
+        changeIcon.innerHTML = `<ion-icon name="lock-open-outline"></ion-icon>`; 
+    } else {
+        signinPassword.type = "password";
+        changeIcon.innerHTML = `<ion-icon name="lock-closed"></ion-icon>`; 
+    }
+}
+
+ let passwordShow = document.querySelector(".passwordShow");
+passwordShow.addEventListener('click' , showPassword)
+
 //  Only run this once to check if user is already logged in
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -28,8 +47,8 @@ export let SignIn = () => {
     });
     return;
   }
-//  check if Email include @gamil.com or not
-   if (!loginEmail.includes("@gmail.com")) {
+  //  check if Email include @gamil.com or not
+  if (!loginEmail.includes("@gmail.com")) {
     Swal.fire({
       icon: "error",
       title: "Invalid Email",
@@ -42,9 +61,9 @@ export let SignIn = () => {
   signInWithEmailAndPassword(auth, loginEmail, loginPassword)
     .then((userCredential) => {
       const user = userCredential.user;
-      
+
       Swal.fire("Logged In", "Welcome!", "success");
-        window.location.href = "dashboard.html";
+      window.location.href = "dashboard.html";
     })
     .catch((error) => {
       Swal.fire({
@@ -61,7 +80,7 @@ export let SignIn = () => {
         if (result.isConfirmed) {
           window.location.href = '/index.html';
         }
+      });
     });
-});
 }
 document.getElementById("login").addEventListener("click", SignIn);

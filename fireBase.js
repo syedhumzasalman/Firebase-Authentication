@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { verifyBeforeUpdateEmail, updateEmail, updateProfile, updatePassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { sendPasswordResetEmail, deleteUser, verifyBeforeUpdateEmail, updateEmail, updateProfile, updatePassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
 
 const firebaseConfig = {
@@ -34,6 +34,8 @@ export {
   updateProfile,
   updateEmail,
   verifyBeforeUpdateEmail,
+  deleteUser,
+  sendPasswordResetEmail,
 }
 
 
